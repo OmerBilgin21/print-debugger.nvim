@@ -24,29 +24,18 @@ Using Lazy.nvim:
 
 ```
 return {
-	"OmerBilgin21/print-debugger.nvim",
-	config = function()
-		require("print-debugger").setup({
-			insert_mode = {
-				enabled = true,
-				keymaps = {
-					"<C-g>",
-				},
-			},
-
-			visual_mode = {
-				enabled = true,
-				keymaps = {
-					"<C-g>",
-				},
-			},
-		})
-	end,
+  "OmerBilgin21/print-debugger.nvim",
+    config = function()
+    require("print-debugger").setup({
+	keymaps = {
+		"<C-g>",
+	},
+	})
 }
 
 ```
 
-TODO: Add packer and some other package manager example installations   
+TODO: Add packer and some other package manager example installations  
 TODO: The visual mode is very unstable, find out why and fix that  
 TODO: Add languages. Currently planned: Go, Rust, PHP, Bash Script, Java  
-TODO: Maybe add normal mode as well?  
+TODO: Maybe add normal mode as well?
