@@ -20,7 +20,7 @@ Starting from Go, I will extend it whenever I have time.
 
 ### Installation
 
-Using Lazy.nvim:
+Lazy.nvim:
 
 ```
 return {
@@ -35,7 +35,34 @@ return {
 
 ```
 
-TODO: Add packer and some other package manager example installations  
-TODO: The visual mode is very unstable, find out why and fix that  
-TODO: Add languages. Currently planned: Go, Rust, PHP, Bash Script, Java  
-TODO: Maybe add normal mode as well?
+Packer.nvim:
+
+```
+use({
+  "OmerBilgin21/print-debugger.nvim",
+  config = function()
+    require("print-debugger").setup({
+      keymaps = {
+        "<C-g>",
+      },
+    })
+  end,
+})
+
+```
+
+Vim-Plug:
+
+```
+Plug 'OmerBilgin21/print-debugger.nvim'
+
+lua << EOF
+  require('print-debugger').setup({
+    keymaps = {
+      "<C-g>",
+    },
+  })
+EOF
+```
+
+TODO: Add languages. Currently planned: Go, Rust, PHP, Bash Script, Java
