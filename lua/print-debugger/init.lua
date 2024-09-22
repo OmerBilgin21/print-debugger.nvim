@@ -28,13 +28,6 @@ function M.setup(config)
 				{ noremap = true, silent = true }
 			)
 		end
-	else
-		vim.keymap.set(
-			{ "i", "x", "n", "s" },
-			"<C-g>",
-			"<cmd>lua require('print-debugger').debug_function()<CR>",
-			{ noremap = true, silent = true }
-		)
 	end
 end
 
