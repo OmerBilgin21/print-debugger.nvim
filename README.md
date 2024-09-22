@@ -1,5 +1,7 @@
 # Print Debugger:
 
+https://github.com/user-attachments/assets/bdd4509a-9872-48de-af43-f0e860756704
+
 Spits out a print statement for different languages.
 I myself am a print debugger, and find it tedious to always write print('data from somewhere', data)
 Therefore, I found myself writing a similar code to what is in here to my config.
@@ -44,8 +46,7 @@ return {
 
 ```
 
-TODO: Add introduction video
-TODO: Add packer and some other package manager example installations
-TODO: The visual mode is very unstable, find out why and fix that
-TODO: Add languages. Currently planned: Go, Rust, PHP, Bash Script, Java.
-TODO: Maybe add normal mode as well?
+TODO: Add packer and some other package manager example installations   
+TODO: The visual mode is very unstable, find out why and fix that  
+TODO: Add languages. Currently planned: Go, Rust, PHP, Bash Script, Java  
+TODO: Maybe add normal mode as well?  
