@@ -65,4 +65,4 @@ lua << EOF
 EOF
 ```
 
-TODO: Add languages. Currently planned: Go, Rust, PHP, Bash Script, Java
+TODO: Add languages. Currently planned: Rust, PHP, Bash Script, Java
