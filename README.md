@@ -17,7 +17,6 @@ Currently supported languages are:
 - Go
 
 I use these mostly, therefore created it for them for now.
-Starting from Go, I will extend it whenever I have time.
 
 ### Installation
 
