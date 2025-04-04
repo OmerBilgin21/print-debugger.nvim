@@ -1,3 +1,6 @@
+local trim = require("print-debugger.trim")
+local remove_str_from_buf = require("print-debugger.remove_str_from_buffer")
+
 local consoles = {
 	"javascript",
 	"typescript",
@@ -10,15 +13,11 @@ local prints = {
 	"lua",
 }
 
-function Trim(str)
-	return str:match("^%s*(.-)%s*$")
-end
-
 local M = {}
 
 M.debug_function = function()
 	local filetype = vim.bo.filetype
-	local selected_text = Trim(vim.fn.getline("."))
+	local selected_text = trim(vim.fn.getline("."))
 	local snippet, offset
 
 	if filetype == "go" then
