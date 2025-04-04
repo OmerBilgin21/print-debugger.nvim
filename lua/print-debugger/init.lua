@@ -16,21 +16,6 @@ end
 
 local M = {}
 
-function M.setup(config)
-	config = config or {}
-
-	if config.keymaps then
-		for _, key in ipairs(config.keymaps) do
-			vim.keymap.set(
-				{ "i", "x", "n", "s" },
-				key,
-				"<cmd>lua require('print-debugger').debug_function()<CR>",
-				{ noremap = true, silent = true }
-			)
-		end
-	end
-end
-
 M.debug_function = function()
 	local filetype = vim.bo.filetype
 	local selected_text = Trim(vim.fn.getline("."))
@@ -58,6 +43,19 @@ M.debug_function = function()
 
 	local cursor = vim.api.nvim_win_get_cursor(0)
 	vim.api.nvim_win_set_cursor(0, { cursor[1], cursor[2] + offset })
+end
+
+function M.setup(config)
+	config = config or {}
+
+	if config.keymaps then
+		for _, key in ipairs(config.keymaps) do
+			pcall(vim.keymap.del, { "i", "n" }, key)
+			vim.keymap.set({ "i", "n" }, key, function()
+				M.debug_function()
+			end, { noremap = true, silent = true })
+		end
+	end
 end
 
 return M
