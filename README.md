@@ -16,6 +16,7 @@ Currently supported languages are:
 - Lua
 - Go
 - Rust
+- Bash Script
 
 I use these mostly, therefore created it for them for now.
 
