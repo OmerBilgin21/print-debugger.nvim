@@ -65,3 +65,6 @@ lua << EOF
   })
 EOF
 ```
+
+Caution: This will break on data types that does not implement the Debug trait for Rust!
+(I dunno Rust, if someone knows a foolproof way, feel free to open a PR.)
