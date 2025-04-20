@@ -22,6 +22,12 @@ M.debug_function = function()
 	if filetype == "go" then
 		snippet = string.format('fmt.Printf("%s: %%v\\n", %s)', selected_text, selected_text)
 		offset = #selected_text + 14
+	elseif filetype == "rust" then
+		snippet = string.format('println!("%s: {:?}", %s)', selected_text, selected_text)
+		offset = #selected_text + 14
+	elseif filetype == "sh" then
+		snippet = string.format('echo "%s $%s"', selected_text, selected_text)
+		offset = #selected_text + 14
 	else
 		local consolable = vim.tbl_contains(consoles, filetype)
 		local printable = vim.tbl_contains(prints, filetype)

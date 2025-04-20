@@ -15,6 +15,7 @@ Currently supported languages are:
 - Python
 - Lua
 - Go
+- Rust
 
 I use these mostly, therefore created it for them for now.
 
@@ -64,5 +65,3 @@ lua << EOF
   })
 EOF
 ```
-
-TODO: Add languages. Currently planned: Rust, PHP, Bash Script, Java
