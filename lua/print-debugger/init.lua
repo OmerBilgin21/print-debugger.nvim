@@ -20,7 +20,7 @@ M.debug_function = function()
 	local snippet, offset
 
 	if filetype == "go" then
-		snippet = string.format('fmt.Printf("%s: %%v\\n", %s)', selected_text, selected_text)
+		snippet = string.format('fmt.Printf("%s: %%+v\\n", %s)', selected_text, selected_text)
 		offset = #selected_text + 14
 	elseif filetype == "rust" then
 		snippet = string.format('println!("%s: {:?}", %s)', selected_text, selected_text)
