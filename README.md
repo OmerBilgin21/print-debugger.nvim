@@ -67,7 +67,7 @@ lua << EOF
 EOF
 ```
 
-Or, if you would like to define your own keymaps, the `debug_function` is exposed via `print-debugger` module.
+Or, if you would like to define your own keymaps, the `debug_function` is exposed via `print-debugger` module.  
 Meaning this would also work:
 ```
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
