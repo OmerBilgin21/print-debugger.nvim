@@ -12,6 +12,25 @@ local prints = {
 	"lua",
 }
 
+local echos = {
+	"bashrc",
+	"zshrc",
+	"sh",
+	"zsh_aliases",
+	"zsh_env",
+	"bash_aliases",
+	"bash_env",
+	"bash",
+	"zsh",
+	"shell",
+	"tmux",
+	"config",
+	"dotenv",
+	"conf",
+	"profile",
+	"aliases",
+}
+
 local M = {}
 
 M.debug_function = function()
@@ -25,17 +44,18 @@ M.debug_function = function()
 	elseif filetype == "rust" then
 		snippet = string.format('println!("%s: {:?}", %s)', selected_text, selected_text)
 		offset = #selected_text + 14
-	elseif filetype == "sh" then
-		snippet = string.format('echo "%s $%s"', selected_text, selected_text)
-		offset = #selected_text + 14
 	else
 		local consolable = vim.tbl_contains(consoles, filetype)
 		local printable = vim.tbl_contains(prints, filetype)
+		local echoes = vim.tbl_contains(echos, filetype)
 
 		if consolable then
 			snippet = string.format("console.log('%s: ', %s)", selected_text, selected_text)
 		elseif printable then
 			snippet = string.format("print('%s: ', %s)", selected_text, selected_text)
+		elseif echoes then
+			snippet = string.format('echo "%s $%s"', selected_text, selected_text)
+			offset = #selected_text + 14
 		else
 			return
 		end
