@@ -36,37 +36,64 @@ local M = {}
 M.debug_function = function()
 	local filetype = vim.bo.filetype
 	local selected_text = trim(vim.fn.getline("."))
-	local snippet, offset
+	local snippet
+	local col
 
 	if filetype == "go" then
-		snippet = string.format('fmt.Printf("%s: %%+v\\n", %s)', selected_text, selected_text)
-		offset = #selected_text + 14
+		if selected_text == "" then
+			snippet = string.format('fmt.Printf(" \\n")', selected_text, selected_text)
+			col = 13
+		else
+			snippet = string.format('fmt.Printf("%s: %%+v\\n", %s)', selected_text, selected_text)
+			col = 16
+		end
 	elseif filetype == "rust" then
-		snippet = string.format('println!("%s: {:?}", %s)', selected_text, selected_text)
-		offset = #selected_text + 14
+		if selected_text == "" then
+			snippet = string.format('println!(" ")', selected_text, selected_text)
+			col = 11
+		else
+			snippet = string.format('println!("%s: {:?}", %s)', selected_text, selected_text)
+			col = 14
+		end
 	else
 		local consolable = vim.tbl_contains(consoles, filetype)
 		local printable = vim.tbl_contains(prints, filetype)
 		local echoes = vim.tbl_contains(echos, filetype)
 
 		if consolable then
-			snippet = string.format("console.log('%s: ', %s)", selected_text, selected_text)
+			if selected_text == "" then
+				snippet = string.format("console.log(' ')", selected_text, selected_text)
+				col = 14
+			else
+				snippet = string.format("console.log('%s: ', %s)", selected_text, selected_text)
+				col = 17
+			end
 		elseif printable then
-			snippet = string.format("print('%s: ', %s)", selected_text, selected_text)
+			if selected_text == "" then
+				snippet = string.format("print(' ')", selected_text, selected_text)
+				col = 8
+			else
+				snippet = string.format("print('%s: ', %s)", selected_text, selected_text)
+				col = 11
+			end
 		elseif echoes then
-			snippet = string.format('echo "%s $%s"', selected_text, selected_text)
-			offset = #selected_text + 14
+			if selected_text == "" then
+				snippet = string.format('echo " "', selected_text, selected_text)
+				col = 7
+			else
+				snippet = string.format('echo "%s $%s"', selected_text, selected_text)
+				col = 9
+			end
 		else
 			return
 		end
-		offset = #selected_text + 13
 	end
-
 	vim.api.nvim_command("normal! d0D")
 	vim.api.nvim_put({ snippet }, "c", true, true)
 
-	local cursor = vim.api.nvim_win_get_cursor(0)
-	vim.api.nvim_win_set_cursor(0, { cursor[1], cursor[2] + offset })
+	local current_pos = vim.api.nvim_win_get_cursor(0)
+	local row = current_pos[1]
+	vim.api.nvim_win_set_cursor(0, { row, col })
 end
 
 function M.setup(config)
