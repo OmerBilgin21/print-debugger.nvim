@@ -22,24 +22,24 @@ I use these mostly, therefore created it for them for now.
 
 ### Installation
 
-Lazy.nvim:
+#### Lazy.nvim
 
-```
+```lua
 return {
   "OmerBilgin21/print-debugger.nvim",
-    config = function()
+  config = function()
     require("print-debugger").setup({
-	keymaps = {
-		"<C-g>",
-	},
-	})
+      keymaps = {
+        "<C-g>",
+      },
+    })
+  end,
 }
-
 ```
 
-Packer.nvim:
+#### Packer.nvim
 
-```
+```lua
 use({
   "OmerBilgin21/print-debugger.nvim",
   config = function()
@@ -50,12 +50,11 @@ use({
     })
   end,
 })
-
 ```
 
-Vim-Plug:
+#### Vim-Plug
 
-```
+```vim
 Plug 'OmerBilgin21/print-debugger.nvim'
 
 lua << EOF
@@ -67,12 +66,48 @@ lua << EOF
 EOF
 ```
 
-Or, if you would like to define your own keymaps, the `debug_function` is exposed via `print-debugger` module.  
-Meaning this would also work:
+---
+
+### Per-language configuration (prefix & spread mode)
+
+You can override the logger function and argument style per filetype.
+
+```lua
+require("print-debugger").setup({
+  go = {
+    prefix = "util.Log",     -- replaces fmt.Printf
+    spread_mode = true,     -- util.Log("x: ", x) instead of formatted string
+  },
+  javascript = {
+    prefix = "logger.info", -- replaces console.log
+  },
+  keymaps = {
+    "<C-g>",
+  },
+})
 ```
+
+* `prefix` replaces the default logging function for that language.
+* `spread_mode` (Go only) disables formatting and passes arguments directly.
+
+Example (Go):
+
+```
+util.Log("tokenString: ", tokenString)
+```
+
+---
+
+Or, if you would like to define your own keymaps, the `debug_function` is exposed via `print-debugger` module.
+Meaning this would also work:
+
+```lua
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
 ```
+
 If you go with the solution above, you then do not need to call the setup function.
 
-Caution: This will break on data types that does not implement the Debug trait for Rust!
-(I dunno Rust, if someone knows a foolproof way, feel free to open a PR.)
+---
+
+Caution: This will break on data types that do not implement the `Debug` trait for Rust.
+(I do not know Rust; PRs welcome.)
